@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  	<body>
+		<a href="https://test.edpl.us/student-skills-projects/stockchart/index.html">Question Source</a>
+	    <div class="vl"></div>
+
+	    <div style="display:flex; ">
+	    
+	      	<div>
+		        <h1 ><div style="color:red">Enter</h1>
+		        	<input type="text" id="stock">
+		        	<input type="submit" value="Submit" onclick="formdata()"/>
+	      
+	      	</div>
+	      
+	      	<hr>
+	      		<div>
+	      			<ul>
+	        			<h2>Content</h2>
+	    			</ul>
+	        
+	      		</div>
+	    	</div>
+		</div>
+    	<script>
+	    	const myHeading = document.querySelector('h2');
+
+	    	var getJSON = function(url, callback) {
+			    var xhr = new XMLHttpRequest();
+			    xhr.open('GET', url, true);
+			    xhr.responseType = 'json';
+			    xhr.onload = function() {
+			      var status = xhr.status;
+			      if (status === 200) {
+			        callback(null, xhr.response);
+			      } else {
+			        callback(status, xhr.response);
+			      }
+			    };
+			    xhr.send();
+			};
+			
+			function f(err, data) {
+			  	if (err !== null) {
+			    	alert('Something went wrong: ' + err);
+			  	} else {
+			    	alert('Your JSON : ' + data);
+			  	}
+			}
+
+			function formdata() 
+			{
+				var stock = document.getElementById("stock").value;
+				// document.writeln("The first name you entered is " + stock + "<br>");
+				myHeading.textContent = stock;
+
+				// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+				var url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+stock+'&apikey=DXH59Z2UYVPZBV0X';
+				//DXH59Z2UYVPZBV0X';
+				//window.alert(JSON.stringify(url));
+
+				myHeading.textContent = stock + " " + getJSON(url,f);
+			}
+  		</script>
+  	</body>
+</html>
+
+
+
