@@ -7,7 +7,7 @@
 	    <div style="display:flex; ">
 	    
 	      	<div>
-		        <h1 ><div style="color:red">Enter</h1>
+		        <h1 ><div style="color:red">Enter Name of the Company</h1>
 		        	<input type="text" id="stock">
 		        	<input type="submit" value="Submit" onclick="formdata()"/>
 	      
@@ -16,7 +16,7 @@
 	      	<hr>
 	      		<div>
 	      			<ul>
-	        			<h2>Content</h2>
+	        			<h2></h2>
 	    			</ul>
 	        
 	      		</div>
@@ -24,7 +24,8 @@
 		</div>
     	<script>
 	    	const myHeading = document.querySelector('h2');
-
+	    	var sting;
+	    	var Stock = stock;
 	    	var getJSON = function(url, callback) {
 			    var xhr = new XMLHttpRequest();
 			    xhr.open('GET', url, true);
@@ -44,7 +45,14 @@
 			  	if (err !== null) {
 			    	alert('Something went wrong: ' + err);
 			  	} else {
-			    	alert('Your JSON : ' + data);
+			  		// string = JSON.stringify(data)
+			  		//const obj = JSON.parse(data)
+			  		//document.querySelector('h2').innerHTML = obj.name;
+			    	// myHeading.textContent = ('Your JSON : ' + data);
+			    	string = data
+			    	d = string[["Time Series (Daily)"]]
+			    	console.log(d["2022-02-04"])
+			    	myHeading.textContent = ('Current stock price : ' +  JSON.stringify(d["2022-02-04"]));
 			  	}
 			}
 
@@ -59,8 +67,11 @@
 				//DXH59Z2UYVPZBV0X';
 				//window.alert(JSON.stringify(url));
 
-				myHeading.textContent = stock + " " + getJSON(url,f);
+				myHeading.textContent =getJSON(url,f);
 			}
+
+			//const obj = JSON.stringify(string)
+			//document.getElementById("h2").innerHTML = string["Time Series (Daily)"];
   		</script>
   	</body>
 </html>
